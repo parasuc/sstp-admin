@@ -1,0 +1,17 @@
+/*treeview*/
+.treeview .hitarea {position: absolute; left: 15px; top: 10px; background-color: #fff; cursor: pointer;}
+.treeview > li > .hitarea {left: 0px; top: 0px;}
+.treeview .hitarea:before {color: #999; content: "\f111"; font-family: "FontAwesome"; transition:all 0.3s;}
+.treeview li:hover .hitarea:before {color: #2973EA;}
+.treeview .hitarea.collapsable-hitarea:before {content: "\f111";}
+.treeview .collapsable,.treeview .expandable{position: relative;}
+.treeview {padding: 0; margin: 0;}
+.treeview li,.treeview ul {margin: 0; padding: 0; display: block; position: relative;}
+.treeview > li {margin-right: 20px; font-weight: 400; padding-bottom: 10px;}
+.treeview > li > ul li {padding: 10px 15px 0; margin: 0;}
+.treeview li:before {display: inline-block; margin-right: 6px; content: "\f111"; font-family: FontAwesome; color: #ddd;}
+.treeview > li ul {border-left: 1px dashed #ccc; margin-left: 7px; font-weight: normal;}
+.treeview > li ul > li:before {content: "\f111";}
+.treeview > li ul > li:hover:before {content: "\f111";}
+.treeview > li ul > li:after {position: absolute; display: block; content: ""; width: 15px; left: -1px; top: 20px; height: 20px; border-top: 1px dashed #ccc;}
+.treeview > li > ul li:last-child:after {border-left: 1px solid #fff;}
