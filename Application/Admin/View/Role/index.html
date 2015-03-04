@@ -1,0 +1,58 @@
+<extend name="Common:base" />
+<block name="content">
+<div class="row">
+	<div class="col-md-6">
+		<div class="box box-primary" id="role-box-ajax">
+			<div class="box-header">
+				<h3 class="box-title">角色列表</h3>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body table-responsive">
+				<table class="table table-hover">
+					<tbody>
+						<tr>
+							<th>ID</th>
+							<th>名称</th>
+							<th>父角色ID</th>
+							<th>操作</th>
+						</tr>
+						<?php foreach($roleList as $role): ?>
+						<tr>
+							<td>#{$role.id}</td>
+							<td title="{$role.remark}">{$role.name}</td>
+							<td>#{$role.pid}</td>
+							<td>
+								<a class="btn btn-info btn-sm ajax" href="{:U('update',array('id'=>$role['id']))}">编辑</a>
+								<a class="btn btn-success btn-sm ajax" href="{:U('edit_privilege',array('id'=>$role['id']))}">维护权限</a>
+								<a class="btn btn-danger btn-sm" href="{:U('del',array('id'=>$role['id']))}" onclick="return confirm('你确定要删除吗？');">删除</a>
+							</td>
+						</tr>
+						<?php endforeach;?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="box box-primary" id="role-right-edit-box">
+		</div>
+	</div>
+</div>
+</block>
+<block name="style">
+<link href="__CSS__/treeview.min.css" rel="stylesheet" type="text/css" />
+<link href="__CSS__/chosen.min.css" rel="stylesheet" type="text/css" />
+</block>
+<block name="script">
+<script src="__JS__/treeview.min.js" type="text/javascript"></script>
+<script src="__JS__/chosen.jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+	$("#role-right-edit-box").load("{:U('add')}");
+	$("#role-box-ajax a.ajax").click(function(e){
+		$("#role-right-edit-box").empty().load(this.href);
+		return false;
+	});
+});
+</script>
+</block>

@@ -17,8 +17,10 @@
 						<?php foreach($privlege1['children'] as $privlege2): ?>
 							<li>{$privlege2.title} 
 								<a href="{:U('update',array('id'=>$privlege2['id']))}" class="ajax">编辑</a>
-								<a href="{:U('add',array('parentId'=>$privlege2['pid']))}" class="ajax">添加子权限</a>
+								<a href="{:U('add',array('parentId'=>$privlege2['id']))}" class="ajax">添加子权限</a>
+								<?php if(!$privlege2['children']): ?>
 								<a class="deleter" href="{:U('del',array('id'=>$privlege2['id']))}" onclick="return confirm('你确定要删除吗？');">删除</a>
+								<?php endif;?>
 								<ul>
 									<?php foreach($privlege2['children'] as $privlege3): ?>
 										<li>{$privlege3.title} 

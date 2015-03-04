@@ -5,8 +5,6 @@ use Think\Model;
 
 class PrivilegeModel extends Model{
     
-    protected $trueTableName    =   'think_node';
-    
     /**
      * 得到模块的菜单
      * @param unknown $module Admin,User
@@ -16,12 +14,12 @@ class PrivilegeModel extends Model{
     }
     
     public function getTopPrivileges(){
-        $res = $this->where("pid=%d",0)->select();
+        $res = $this->where("pid=%d and status=1",0)->order("sort")->select();
         //dump($res);
         foreach ($res as $k=>&$v){
-            $v['children'] = $this->where("pid=%d",$v['id'])->select();
+            $v['children'] = $this->where("pid=%d and status=1",$v['id'])->order("sort")->select();
             foreach ($v['children'] as $k2=>&$v2){
-                $v2['children'] = $this->where("pid=%d",$v2['id'])->select();
+                $v2['children'] = $this->where("pid=%d and status=1",$v2['id'])->order("sort")->select();
             }
         }
         //dump($res);

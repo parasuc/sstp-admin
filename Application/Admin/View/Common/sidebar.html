@@ -5,34 +5,19 @@
 		<!-- Sidebar user panel -->
 		<div class="user-panel">
 			<div class="pull-left image">
-				<img src="dist/img/user2-160x160.jpg" class="img-circle"
+				<img src="__IMG__/avatar.png" class="img-circle"
 					alt="User Image" />
 			</div>
 			<div class="pull-left info">
 				<p>Alexander Pierce</p>
-
 				<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 			</div>
 		</div>
-		<!-- search form -->
-		<form action="#" method="get" class="sidebar-form">
-			<div class="input-group">
-				<input type="text" name="q" class="form-control"
-					placeholder="Search..." /> <span class="input-group-btn">
-					<button type='submit' name='seach' id='search-btn'
-						class="btn btn-flat">
-						<i class="fa fa-search"></i>
-					</button>
-				</span>
-			</div>
-		</form>
-		<!-- /.search form -->
 		<!-- sidebar menu: : style can be found in sidebar.less -->
 		<ul class="sidebar-menu">
-			<li class="header">菜单</li>
 			<?php foreach($_SESSION['_ACCESS_LIST'][MODULE_NAME] as $module=>$mv):
-				if(count($mv)>2):?>
-			<li class="treeview">
+				if($mv["__INFO__"]["type"]!=0):?>
+			<li class="treeview <?php echo $module==CONTROLLER_NAME?'active':'' ?>">
 				<a href='javascript:void(0);'> <i class="fa fa-dashboard"></i>
 					<span><?php echo $mv["__INFO__"]["title"]?></span> <i class="fa fa-angle-left pull-right"></i>
 				</a>
@@ -45,11 +30,11 @@
 				</ul>
 			</li>
 				<?php else:?>
-				<?php unset($mv["__INFO__"]);foreach($mv as $action=>$av):?>
-					<li class="<?php if($module==CONTROLLER_NAME){echo 'active';} ?>"><a href="{:U(MODULE_NAME."/".$module."/".$action)}">
+				<?php unset($mv["__INFO__"]);foreach($mv as $action=>$av):if($av["type"]!=0):?>
+					<li class="<?php if($module==CONTROLLER_NAME&&$action==ACTION_NAME){echo 'active';} ?>"><a href="{:U(MODULE_NAME."/".$module."/".$action)}">
 						<i class="fa fa-circle-o"></i> <?php echo $av["title"]?></a>
 					</li>
-				<?php endforeach; ?>
+				<?php endif;endforeach; ?>
 			<?php endif;endforeach; ?>
 			
 		</ul>

@@ -12,9 +12,9 @@
 			<option value="0">/</option>
         	<?php foreach($topPrivileges as $privlege1): ?>
         	<?php if($sstp_add):?>
-        		<option value="{$privlege1['id']}" <?php if($privlege1['pid']==$_GET['parentId']) echo "selected"?>>/{$privlege1.title }</option>
+        		<option value="{$privlege1['id']}" <?php if($privlege1['id']==$_GET['parentId']) echo "selected"?>>/{$privlege1.title }</option>
         		<?php foreach($privlege1['children'] as $privlege2): ?>
-	        		<option value="{$privlege2['id']}" <?php if($privlege2['pid']==$_GET['parentId']) echo "selected"?>>/{$privlege1.title }/{$privlege2.title }</option>
+	        		<option value="{$privlege2['id']}" <?php if($privlege2['id']==$_GET['parentId']) echo "selected"?>>/{$privlege1.title }/{$privlege2.title }</option>
         		<?php endforeach;?>
         	<?php else:?>
 	        	<?php if($model['id']!=$privlege1['id']):?>
@@ -49,9 +49,22 @@
 		</div>
       </div>
       <div class="form-group"> 
+        <label class="col-md-2 control-label">排序</label>
+        <div class="col-md-9">
+        	<input type="text" name="sort" id="sort" value="{$model.sort}" class="form-control">
+		</div>
+      </div>
+      <div class="form-group"> 
+        <label class="col-md-2 control-label">类型</label>
+        <div class="col-md-9">
+        	非菜单<input type="radio" name="type" value="0" <?php echo $model[type]==0?"checked":"" ?>>　
+        	菜单<input type="radio" name="type" value="1" <?php echo $model[type]!=0?"checked":"" ?>>
+		</div>
+      </div>
+      <div class="form-group"> 
         <label class="col-md-2 control-label">描述</label>
         <div class="col-md-9">
-        	<textarea name="remark" id="remark" class="form-control" rows="3">{$remark}</textarea>
+        	<textarea name="remark" id="remark" class="form-control" rows="3">{$model.remark}</textarea>
 		</div>
       </div>
       <div class="form-group">

@@ -1,0 +1,109 @@
+<form method="post" class="form-horizontal" id="editForm" action='__ACTION__'>
+<?php if(!$sstp_add):?>
+	<input type="hidden" name="id" value="{$model.id}"/>
+<?php endif;?>
+  <div class="panel">
+    <div class="panel-heading"><strong><?php echo $sstp_add?"添加":"编辑" ?></strong></div>
+    <div class="panel-body">
+      <div class="form-group"> 
+        <label class="col-md-3 control-label">名称</label>
+        <div class="col-md-6">
+        	<input type="text" name="node_name" id="node_name" value='{$model.node_name}' class="form-control required {minlength:2}">
+		</div>
+      </div>
+      <div class="form-group"> 
+        <label class="col-md-3 control-label">节点地址</label>
+        <div class="col-md-6">
+        	<input type="text" name="node_server" id="node_server" value='{$model.node_server}' class="form-control required {minlength:2}">
+		</div>
+      </div>
+      <div class="form-group"> 
+        <label class="col-md-3 control-label">加密方式</label>
+        <div class="col-md-6">
+        	<select name="node_method" class="chosen form-control">
+        		<?php function echo_node_method_option($value,$model){ ?>
+				<option value="<?php echo $value ?>" <?php echo $model['node_method']==$value?"selected":"" ?>><?php echo $value ?></option>
+				<?php } ?>
+				<?php 
+				foreach(C("SUPPORT_ENCRYPTION_METHOD") as $v){
+					echo_node_method_option($v,$model);
+				}
+				?>
+        	</select>
+        </div>
+       </div>
+       <div class="form-group"> 
+        <label class="col-md-3 control-label">状态</label>
+        <div class="col-md-6">
+        	<select name="node_status" class="chosen form-control">
+        		<?php function echo_node_option($value,$display,$model){ ?>
+        		<option value="<?php echo $value ?>" <?php echo $model['node_status']==$value?"selected":"" ?>><?php echo $display ?></option>
+				<?php } ?>
+				<?php 
+				foreach(C("SUPPORT_NODE_STATUS") as $k=>$v){
+					echo_node_option($k,$v['name'],$model);
+				}
+				?>
+        	</select>
+		</div>
+      </div>
+      <div class="form-group"> 
+        <label class="col-md-3 control-label">类型</label>
+        <div class="col-md-6">
+        	<input type="text" name="node_name" id="node_name" value='{$model.node_name}' class="form-control required {minlength:2}">
+		</div>
+      </div>
+      <div class="form-group"> 
+        <label class="col-md-3 control-label">排序</label>
+        <div class="col-md-6">
+        	<input type="text" name="node_name" id="node_name" value='{$model.node_name}' class="form-control required {minlength:2}">
+		</div>
+      </div>
+      <div class="form-group"> 
+        <label class="col-md-3 control-label">描述</label>
+        <div class="col-md-8">
+        	<textarea name="node_info" id="node_info" class="form-control" rows="3">{$model.node_info}</textarea>
+		</div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2"></label>
+        <div class="col-md-4"> 
+        	<input type="submit" id="submit" class="btn btn-primary" value="<?php echo $sstp_add?"添加":"编辑" ?>" data-loading="稍候...">
+		</div>
+      </div>
+    </div>
+  </div>
+</form>
+<script type="text/javascript">
+$(".chosen").chosen({no_results_text: '没有匹配的选项', disable_search_threshold: 1, search_contains: true, width: '100%'});
+//if($.fn.chosenIcons) $('#chosenIcons').chosenIcons();
+$(function(){
+	$("form").validate({
+		rules : {
+			required : {
+				required : true
+			},
+			email : {
+				required : true,
+				email : true
+			},
+			date : {
+				required : true,
+				date : true
+			},
+			url : {
+				required : true,
+				url : true
+			}
+		},
+		errorClass : "label-warning",
+		highlight : function(element, errorClass, validClass) {
+			$(element).parents('.control-group').addClass('has-error');
+		},
+		unhighlight : function(element, errorClass, validClass) {
+			$(element).parents('.control-group').removeClass('has-error');
+			$(element).parents('.control-group').addClass('success');
+		},
+	});
+});
+</script>

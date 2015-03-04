@@ -19,22 +19,29 @@ class PrivilegeController extends BaseController {
             $this->display("edit");
         }else{
             $m = new PrivilegeModel();
-            if (!$m->create(array(
-                "title"=>I("post.title"),
-                "pid"=>I("post.pid"),
-                "name"=>I("post.name"),
-                "remark"=>I("post.remark"),
-                "icon"=>I("post.icon"),
-                "status"=>1,
-                "sort"=>1,
-            ),1)){ 
-                // 指定新增数据     
-                // 如果创建失败 表示验证没有通过 输出错误提示信息     
-                exit($m->getError());
-            }else{     
-                // 验证通过 可以进行其他数据操作
-                $m->add();
-                $this->success("添加成功！");
+            $pnode = $m->where("id=%d",I("post.pid"))->find();
+            if (isset($pnode)&&isset($pnode['level'])){
+                if (!$m->create(array(
+                    "title"=>I("post.title"),
+                    "pid"=>I("post.pid"),
+                    "name"=>I("post.name"),
+                    "remark"=>I("post.remark"),
+                    "icon"=>I("post.icon"),
+                    "status"=>1,
+                    "level"=>$pnode['level']+1,
+                    "sort"=>I("post.sort"),
+                    "type"=>I("post.type"),
+                ),1)){
+                    // 指定新增数据
+                    // 如果创建失败 表示验证没有通过 输出错误提示信息
+                    exit($m->getError());
+                }else{
+                    // 验证通过 可以进行其他数据操作
+                    $m->add();
+                    $this->success("添加成功！");
+                }
+            }else{
+               $this->error("pid不存在"); 
             }
         }
         
@@ -56,9 +63,19 @@ class PrivilegeController extends BaseController {
                 "name"=>I("post.name"),
                 "remark"=>I("post.remark"),
                 "icon"=>I("post.icon"),
+                "sort"=>I("post.sort"),
+                "type"=>I("post.type"),
             ))->save();
             $this->success("修改成功","index");
         }
+    }
+    
+    public function del(){
+        $m = new PrivilegeModel();
+        $m->where("id=%d",I("get.id"))->save(array(
+           "status"=>0 
+        ));
+        $this->success("删除成功","/Admin/Privilege/index");
     }
     
     public function test(){

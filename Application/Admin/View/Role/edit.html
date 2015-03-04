@@ -1,0 +1,72 @@
+<form method="post" class="form-horizontal" id="editForm" action='__ACTION__'>
+<?php if(!$sstp_add):?>
+	<input type="hidden" name="id" value="{$model.id}"/>
+<?php endif;?>
+  <div class="panel">
+    <div class="panel-heading"><strong><?php echo $sstp_add?"添加":"编辑" ?></strong></div>
+    <div class="panel-body">
+      <div class="form-group"> 
+        <label class="col-md-2 control-label">父级角色</label>
+        <div class="col-md-8">
+        	<select name="pid" id="parentId" class="chosen form-control">
+			<option value="0">无</option>
+        	<?php foreach($roleList as $role): ?>
+        		<option value="{$role.id}" <?php echo $role['id']==$model['pid']?"selected":"" ?>>{$role.name}</option>
+        	<?php endforeach;?>
+			</select>
+		</div>
+      </div>
+      <div class="form-group"> 
+        <label class="col-md-2 control-label">名称</label>
+        <div class="col-md-4">
+        	<input type="text" name="name" id="name" value='{$model.name}' class="form-control required {minlength:2}">
+		</div>
+      </div>
+      <div class="form-group"> 
+        <label class="col-md-2 control-label">描述</label>
+        <div class="col-md-9">
+        	<textarea name="remark" id="remark" class="form-control" rows="3">{$model.remark}</textarea>
+		</div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2"></label>
+        <div class="col-md-4"> 
+        	<input type="submit" id="submit" class="btn btn-primary" value="<?php echo $sstp_add?"添加":"编辑" ?>" data-loading="稍候...">
+		</div>
+      </div>
+    </div>
+  </div>
+</form>
+<script type="text/javascript">
+$(".chosen").chosen({no_results_text: '没有匹配的选项', disable_search_threshold: 1, search_contains: true, width: '100%'});
+//if($.fn.chosenIcons) $('#chosenIcons').chosenIcons();
+$(function(){
+	$("form").validate({
+		rules : {
+			required : {
+				required : true
+			},
+			email : {
+				required : true,
+				email : true
+			},
+			date : {
+				required : true,
+				date : true
+			},
+			url : {
+				required : true,
+				url : true
+			}
+		},
+		errorClass : "label-warning",
+		highlight : function(element, errorClass, validClass) {
+			$(element).parents('.control-group').addClass('has-error');
+		},
+		unhighlight : function(element, errorClass, validClass) {
+			$(element).parents('.control-group').removeClass('has-error');
+			$(element).parents('.control-group').addClass('success');
+		},
+	});
+});
+</script>
