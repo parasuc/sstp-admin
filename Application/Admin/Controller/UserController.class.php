@@ -1,8 +1,19 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;
-class UserController extends Controller {
+use Think\Page;
+class UserController extends BaseController {
+    
+    /**
+     * 用户列表
+     */
     public function index(){
-        $this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover,{color:blue;}</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p><br/>版本 V{$Think.version}</div><script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"></script><thinkad id="ad_55e75dfae343f5a1"></thinkad><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>','utf-8');
+        $m = M("user");
+        $list = $m->page($_GET['p'].",".C("PAGE_SIZE"))->select();
+        $this->assign('userList',$list);// 赋值数据集
+        $count      = $m->count();// 查询满足要求的总记录数
+        $page       = new Page($count,C("PAGE_SIZE"));// 实例化分页类 传入总记录数和每页显示的记录数
+        $show       = $page->show();// 分页显示输出
+        $this->assign('page',$show);// 赋值分页输出
+        $this->display(); // 输出模板
     }
 }

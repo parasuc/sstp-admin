@@ -22,9 +22,10 @@
 							<td title="{$role.remark}">{$role.name}</td>
 							<td>#{$role.pid}</td>
 							<td>
-								<a class="btn btn-info btn-sm ajax" href="{:U('update',array('id'=>$role['id']))}">编辑</a>
-								<a class="btn btn-success btn-sm ajax" href="{:U('edit_privilege',array('id'=>$role['id']))}">维护权限</a>
-								<a class="btn btn-danger btn-sm" href="{:U('del',array('id'=>$role['id']))}" onclick="return confirm('你确定要删除吗？');">删除</a>
+								<a class="btn btn-info btn-sm ajax" href="{:U('update',array('id'=>$role['id']))}"><i class="fa fa-pencil-square-o"></i> 编辑</a>
+								<a class="btn btn-success btn-sm ajax" href="{:U('edit_privilege',array('id'=>$role['id']))}"><i class="fa fa-wrench"></i> 维护权限</a>
+								<a class="btn btn-danger btn-sm ajax-confirm" href="{:U('del',array('id'=>$role['id']))}" 
+								data-confirm="你确定要删除{$role.name}吗？"><i class="fa fa-trash-o"></i> 删除</a>
 							</td>
 						</tr>
 						<?php endforeach;?>

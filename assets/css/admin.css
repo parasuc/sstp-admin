@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+
+.form-group label.label-warning {
+	color: #fff;
+	font-weight: normal;
+	margin-top: 2px;
+	padding: 2px;
+}
+
+.popover-success {
+	background-color: #47a447;
+	border-color: #47a447;
+	color: #fff
+}
+
+.popover-success.right .arrow,.popover-success.right .arrow:after {
+	border-right-color: #47a447
+}
+
+.popover-success .popover-content:before {
+	content: "\f05d";
+	font-family: FontAwesome;
+	display: inline-block;
+	margin-right: 6px
+}
+.popover-danger .popover-content:before {
+	content: "\f06a";
+	font-family: FontAwesome;
+	display: inline-block;
+	margin-right: 6px
+}
+
+.popover-danger {
+	background-color: #f8e3e6;
+	border-color: #f8e3e6;
+	color: #d2322d
+}
+.popover-danger.right .arrow,.popover-danger.right .arrow:after {
+	border-right-color: #f8e3e6
+}

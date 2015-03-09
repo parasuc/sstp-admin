@@ -17,3 +17,39 @@ jQuery.extend(jQuery.validator.messages, {
 	max : jQuery.validator.format("请输入一个最大为 {0} 的值"),
 	min : jQuery.validator.format("请输入一个最小为 {0} 的值")
 });
+$(function(){
+	
+	$("a.ajax-confirm").confirmation({
+		title:"你确定进行此操作吗？",
+		placement:"top",
+		btnOkLabel:"确定",
+		btnCancelLabel:"取消",
+		onConfirm: function(event,element) {
+			element.button('loading');
+			$.getJSON(element.get(0).href,function(data){
+				element.button('reset');
+				element.removeAttr("title");
+				var jump_url = data.url;
+				if(data.url&&data.url.length>0){
+					jump_url=data.url;
+				}else{
+					jump_url = window.location.href;
+				}
+				element.popover({
+					trigger : 'manual',
+					content : data.info,//+'<a id="href" href="'+jump_url+'">跳转</a> 等待时间： <b id="wait">3</b>',
+					placement : 'right'
+				}).popover('show');
+				element.next('.popover').addClass(
+						data.status==1?'popover-success':'popover-danger');
+				function distroy() {
+					element.popover('destroy')
+					window.location.href = jump_url;
+				}
+				setTimeout(distroy, 1200);
+			});
+			//console.info(element.get(0).href);
+		}
+	});
+	
+});

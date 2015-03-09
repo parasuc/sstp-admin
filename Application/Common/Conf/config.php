@@ -32,6 +32,8 @@ return array(
     'RBAC_NODE_TABLE'           =>'ss_privilege',
     'SHOW_PAGE_TRACE'=>1,//显示调试信息
     
+    'PAGE_SIZE'=>20,//默认每页显示多少条记录
+    
     'SUPPORT_ENCRYPTION_METHOD'=>array(
         "table","rc4-md5","salsa20","chacha20","aes-256-cfb","aes-192-cfb","aes-128-cfb","rc4"
     ),
