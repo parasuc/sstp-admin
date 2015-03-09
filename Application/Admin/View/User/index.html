@@ -4,28 +4,35 @@
 	<div class="col-md-12">
 		<div class="box box-primary" id="role-box-ajax">
 			<div class="box-header">
-				<h3 class="box-title">角色列表</h3>
+				<h3 class="box-title">用户列表</h3>
 			</div>
 			<!-- /.box-header -->
-			<div class="box-body table-responsive">
+			<div class="box-body table-responsive no-padding">
 				<table class="table table-hover">
 					<tbody>
 						<tr>
-							<th>ID</th>
-							<th>名称</th>
-							<th>父角色ID</th>
+							<th>用户名</th>
+							<th>邮箱</th>
+							<th>设置流量</th>
+							<th>剩余流量</th>
+							<th>上传流量</th>
+							<th>下载流量</th>
+							<th>最后签到</th>
+							<th>最后使用</th>
 							<th>操作</th>
 						</tr>
 						<?php foreach($userList as $user): ?>
-						<tr>
-							<td>#{$user.id}</td>
-							<td title="">{$user.name}</td>
-							<td>#{$user.email}</td>
-							<td>
+						<tr><?php $tomb = 1024*1024;$togb = $tomb*1024; ?>
+							<td>{$user.user_name}</td>
+							<td>{$user.email}</td>
+							<td><?php echo round($user['transfer_enable']/$togb,2) ?>G</td>
+							<td><?php echo round(($user['transfer_enable']-$user['u']-$user['d'])/$togb,2); ?>G</td>
+                            <td><?php echo round($user['u']/$tomb,2); ?>M</td>
+                            <td><?php echo round($user['d']/$tomb,2); ?>M</td>
+                            <td><?php echo date('Y-m-d H:i:s',$user['last_check_in_time']); ?></td>
+                            <td><?php echo date('Y-m-d H:i:s',$user['t']); ?></td>
+                            <td>
 								<a class="btn btn-info btn-sm ajax" href="{:U('update',array('id'=>$user['id']))}"><i class="fa fa-pencil-square-o"></i> 编辑</a>
-								<a class="btn btn-success btn-sm ajax" href="{:U('edit_privilege',array('id'=>$user['id']))}"><i class="fa fa-wrench"></i> 维护权限</a>
-								<a class="btn btn-danger btn-sm ajax-confirm" href="{:U('del',array('id'=>$user['id']))}" 
-								data-confirm="你确定要删除{$user.name}吗？"><i class="fa fa-trash-o"></i> 删除</a>
 							</td>
 						</tr>
 						<?php endforeach;?>
