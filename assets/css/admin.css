@@ -38,3 +38,39 @@
 .popover-danger.right .arrow,.popover-danger.right .arrow:after {
 	border-right-color: #f8e3e6
 }
+
+/**pager**/
+ .table tfoot .pager{margin:0}.outer .table tbody td>a:visited,#crumbs>a:visited,.side>a:visited{color:#551a8b}#querybox{margin:35px -10px -7px;background-color:#fff;height:0;border-top:1px solid #ddd;position:relative;z-index:199;overflow:hidden;display:none}#querybox form{padding:10px}#querybox.show{display:block;height:auto}#titlebar #querybox{margin:5px -20px -10px}.outer>.container{margin:0 auto;padding:0;border:1px solid #ddd}.outer>.container>#featurebar,.outer>.container>#titlebar{margin:0}.outer>.container>form,body>.container>form{padding:10px 40px 10px 20px}.outer>.container .table-form,.outer>.container .table-data{border:0}.outer>.container>.table-data{margin:10px 0}.outer .container>.main{padding:10px 20px}.outer .main .article-content{font-size:14px;padding:0}.outer .main .actions{text-align:center;margin-bottom:20px}.outer .main .actions>.btn,.outer .main .actions>.btn-group{margin:0 4px}.outer .main ul.list-unstyled:last-child{margin-bottom:0}.outer .main ul.list-unstyled li{padding:2px 0}.outer .main .table tr>th:first-child,.outer .main .table tr>td:first-child{padding-left:0}.outer .main-side>fieldset{padding:5px 20px 10px 10px}.outer .main-side>fieldset>.table{border:0}.outer .main .tabs{margin-bottom:15px}.outer .table-data.table-condensed td,.outer .table-data.table-condensed th{padding:3px 8px}.outer .table-data.table-condensed th{font-weight:normal;color:#444}.outer .table-data th.strong,.outer .table-data td.strong,.outer .table-data th>strong{font-weight:bold}.outer.with-side #featurebar,.outer.with-side #titlebar{margin-bottom:20px}.outer.with-side .main,.outer.with-side .side+form,.outer.with-side .main,.outer.with-side .side+table{margin-left:212px;margin-right:0}.outer.with-side.with-transition .main,.outer.with-side.with-transition .side+form,.outer.with-side.with-transition .main,.outer.with-side.with-transition .side+table{transition:all .3s}.outer.with-side .table tr>th:first-child,.outer.with-side .table tr>td:first-child{padding-left:8px}.outer.with-side .table tr>th:last-child,.outer.with-side .table tr>td:last-child{padding-right:8px}.outer .side{width:192px;position:absolute;left:20px}.outer .side-body{overflow:hidden}.outer .side-body .panel{min-width:180px}.outer .side-body .panel-body{padding:10px}.outer .side-handle{position:absolute;text-align:center;cursor:pointer;right:0;top:0;width:15px;padding:0;line-height:32px;border:1px solid #d5d5d5;background:#fff;color:#666;transition:all .3s;z-index:99}.outer .side-handle:hover{background:#e5e5e5;color:#141414}.outer.with-transition .side,.outer .side-handle.with-transition{transition:all .3s}.outer.hide-side .side{width:0;border:0}.outer.hide-side .side .side-handle{right:-15px}.outer.with-side.hide-side .main,.outer.with-side.hide-side .side+form,.outer.with-side.hide-side .main,.outer.with-side .side+table{margin-left:0}.outer form>.btn{margin-right:10px}.outer form .panel{margin-bottom:0}.pager{margin-bottom:0;line-height:20px;color:#999}.pager .dropdown{display:inline-block}.pager a{color:#444}.pager a:hover{color:#141414}.pager>.dropdown>a,.pager>i,.pager>a{display:inline-block;position:relative;padding:5px;min-width:25px;text-align:center;margin-left:-5px}.pager .dropdown>a:hover,.pager>a:hover{background:#e5e5e5}.pager .dropdown-menu{margin-top:0;width:212px;margin-left:-5px;padding:0}.pager .dropdown-menu>li{display:block;float:left;width:70px;border-right:1px dotted #ddd;border-bottom:1px dotted #ddd}
+.pager .dropdown-menu > li {
+display: block;
+float: left;
+width: 70px;
+border-right: 1px dotted #ddd;
+border-bottom: 1px dotted #ddd;
+	position: relative;
+}
+.pager .dropdown-menu {
+	border-right: none;
+}
+.dropdown-menu>li>a{
+	display: block;
+	border-radius:0;
+	border: none;
+	text-align: center;
+}
+.dropdown-menu>.active>a:before {
+content: "\f00c";
+font-family: FontAwesome;
+font-size: 12px;
+position: absolute;
+right: 8px;
+top: 7px;
+display: block;
+font-weight: normal;
+}
+/**pager end**/
+/**panel-action**/
+.panel-actions{float: right;margin-top: -4px;margin-right: 0px;}
+.panel-heading > h1,.panel-heading > h2,.panel-heading > h3,.panel-heading > h4,.panel-heading > h5,.panel-heading > h6 {margin: 0}
+.panel-actions .btn.btn-link:hover{background: transparent;box-shadow: none;}
+/**panel-action end**/

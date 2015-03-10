@@ -21,7 +21,7 @@ class Page{
 
     private $p       = 'p'; //分页参数名
     private $url     = ''; //当前链接URL
-    private $nowPage = 1;
+    public $nowPage = 1;
 
 	// 分页显示定制
     private $config  = array(
@@ -48,6 +48,11 @@ class Page{
         $this->nowPage    = empty($_GET[$this->p]) ? 1 : intval($_GET[$this->p]);
         $this->nowPage    = $this->nowPage>0 ? $this->nowPage : 1;
         $this->firstRow   = $this->listRows * ($this->nowPage - 1);
+        /* 计算分页信息 */
+        $this->totalPages = ceil($this->totalRows / $this->listRows); //总页数
+        if(!empty($this->totalPages) && $this->nowPage > $this->totalPages) {
+            $this->nowPage = $this->totalPages;
+        }
     }
 
     /**

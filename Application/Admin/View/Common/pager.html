@@ -1,0 +1,68 @@
+<!-- 分页开始 -->
+<div style="float: right; clear: none;" class="pager">
+	共 <strong><?php echo $page->totalRows ?></strong> 条记录，
+	<div class="dropdown dropup">
+		<a href="javascript:;" data-toggle="dropdown" id="_recPerPage"
+			data-value="<?php echo $page->listRows ?>" aria-expanded="false">每页 <strong><?php echo $page->listRows?></strong> 条<span
+			class="caret"></span></a>
+		<script type="text/javascript">
+			var pageSize = <?php echo $page->listRows?>;
+		</script>
+		<ul class="dropdown-menu">
+			<li class="<?php echo $page->listRows==5?'active':'' ?>"><a href="javascript:submitPage(5,1)">5</a></li>
+			<li class="<?php echo $page->listRows==10?'active':'' ?>"><a href="javascript:submitPage(10,1)">10</a></li>
+			<li class="<?php echo $page->listRows==20?'active':'' ?>"><a href="javascript:submitPage(20,1)">20</a></li>
+			<li class="<?php echo $page->listRows==50?'active':'' ?>"><a href="javascript:submitPage(50,1)">50</a></li>
+			<li class="<?php echo $page->listRows==80?'active':'' ?>"><a href="javascript:submitPage(80,1)">80</a></li>
+			<li class="<?php echo $page->listRows==100?'active':'' ?>"><a href="javascript:submitPage(100,1)">100</a></li>
+		</ul>
+	</div>
+	<strong>第<?php echo $page->nowPage ?>页/共<?php echo $page->totalPages ?>页</strong>
+	<script type="text/javascript">
+		var pageCount = <?php echo $page->totalPages ?>;
+	</script>
+	<?php if($page->nowPage!=1): ?>
+		<a href="javascript:goMyPage(1);"><i class="fa fa-step-backward" title="首页"></i></a>
+		<a href="javascript:;" onclick="goMyPage(<?php echo $page->nowPage-1 ?>)"><i class="fa fa-hand-o-left" title="上一页"></i></a>
+	<?php else: ?>
+		<i class="fa fa-step-backward" title="首页"></i>
+		<i class="fa fa-hand-o-left" title="上一页"></i> 
+	<?php endif; ?>
+	<?php if($page->nowPage!=$page->totalPages): ?>
+		<a href="javascript:goMyPage(<?php echo $page->nowPage+1 ?>);"><i class="fa fa-hand-o-right" title="下一页"></i> </a>
+		<a href="javascript:goMyPage(<?php echo $page->totalPages ?>);"><i class="fa fa-step-forward" title="末页"></i> </a>
+	<?php else: ?>
+		<i class="fa fa-hand-o-right" title="下一页"></i> 
+		<i class="fa fa-step-forward" title="末页"></i> 
+	<?php endif; ?>
+	跳<input type="text" id="pager-go" style="text-align: center; width: 50px;display: inline;" class="form-control">页
+	<input type="button" id="goto" value="GO!" class="btn" onclick="goMyPage($('#pager-go').val())">
+</div>
+<script type="text/javascript">
+	function goMyPage(pageIndex) {
+		if (isNaN(pageIndex) || pageIndex<=0||pageIndex>pageCount) {
+			alert("请输入合法页码");
+			document.getElementById("pager-go").value = "";
+			return;
+		}
+		document.getElementById("mypager-form-pageIndex").value = pageIndex;
+		document.getElementById("mypager-form-pageSize").value = pageSize;
+		myclick("mypager-submit");
+	}
+	function submitPage(ps, pi) {
+		if (pageSize == ps)
+			return;
+		pageSize = ps;
+		goMyPage(pi);
+	}
+	function myclick(name) {
+		if (document.all) {
+			document.getElementById(name).click();
+		} else {
+			var evt = document.createEvent("MouseEvents");
+			evt.initEvent("click", true, true);
+			document.getElementById(name).dispatchEvent(evt);
+		}
+	}
+</script>
+<!-- 分页结束 -->
