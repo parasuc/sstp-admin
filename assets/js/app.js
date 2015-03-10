@@ -259,6 +259,7 @@ $.AdminLTE.pushMenu = function (toggleBtn) {
  * @Usage: $.AdminLTE.tree('.sidebar')
  */
 $.AdminLTE.tree = function (menu) {
+	var sidebar_time = 200;
   $("li a", $(menu)).click(function (e) {
     //Get the clicked link and the next element
     var $this = $(this);
@@ -267,7 +268,7 @@ $.AdminLTE.tree = function (menu) {
     //Check if the next element is a menu and is visible
     if ((checkElement.is('.treeview-menu')) && (checkElement.is(':visible'))) {
       //Close the menu
-      checkElement.slideUp('normal', function () {
+      checkElement.slideUp(sidebar_time, function () {
         checkElement.removeClass('menu-open');
       });
       checkElement.parent("li").removeClass("active");
@@ -277,14 +278,14 @@ $.AdminLTE.tree = function (menu) {
       //Get the parent menu
       var parent = $this.parents('ul').first();
       //Close all open menus within the parent
-      var ul = parent.find('ul:visible').slideUp('normal');
+      var ul = parent.find('ul:visible').slideUp(sidebar_time);
       //Remove the menu-open class from the parent
       ul.removeClass('menu-open');
       //Get the parent li
       var parent_li = $this.parent("li");
 
       //Open the target menu and add the menu-open class
-      checkElement.slideDown('normal', function () {
+      checkElement.slideDown(sidebar_time, function () {
         //Add the class active to the parent li
         checkElement.addClass('menu-open');
         parent.find('li.active').removeClass('active');
